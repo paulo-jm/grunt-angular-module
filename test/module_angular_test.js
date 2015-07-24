@@ -1,3 +1,5 @@
+/* global exports */
+
 'use strict';
 
 var grunt = require('grunt');
@@ -22,12 +24,12 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
-exports.module_angular = {
+exports.ngModule = {
   setUp: function(done) {
     // setup here if necessary
     done();
   },
-  default_options: function(test) {
+  ui: function(test) {
     test.expect(1);
 
     var actual = grunt.file.read('tmp/default_options');
@@ -36,7 +38,7 @@ exports.module_angular = {
 
     test.done();
   },
-  custom_options: function(test) {
+  test: function(test) {
     test.expect(1);
 
     var actual = grunt.file.read('tmp/custom_options');
@@ -44,5 +46,5 @@ exports.module_angular = {
     test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
 
     test.done();
-  },
+  }
 };
