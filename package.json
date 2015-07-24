@@ -1,23 +1,23 @@
 {
-  "name": "grunt-module-angular",
+  "name": "grunt-angular-module",
   "description": "The best Grunt plugin ever.",
   "version": "0.1.0",
-  "homepage": "https://github.com/pauojm/grunt-module-angular",
+  "homepage": "https://github.com/paulo-jm/grunt-angular-module",
   "author": {
     "name": "Paulo Jose Moreira",
     "email": "paulojosemoreira@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/pauojm/grunt-module-angular.git"
+    "url": "git://github.com/pauo-jm/grunt-angular-module.git"
   },
   "bugs": {
-    "url": "https://github.com/pauojm/grunt-module-angular/issues"
+    "url": "https://github.com/pauo-jm/grunt-angular-module/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/pauojm/grunt-module-angular/blob/master/LICENSE-MIT"
+      "url": "https://github.com/pauo-jm/grunt-angular-module/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {

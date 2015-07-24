@@ -1,6 +1,6 @@
 /*
- * grunt-module-angular
- * https://github.com/pauojm/grunt-module-angular
+ * grunt-angular-module
+ * https://github.com/pauojm/grunt-angular-module
  *
  * Copyright (c) 2015 Paulo Jose Moreira
  * Licensed under the MIT license.
