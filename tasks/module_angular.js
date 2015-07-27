@@ -24,7 +24,7 @@ module.exports = function (grunt) {
             separator: ', ',
             quoteChar: '"',
             indentString: '  ',
-            htmlmin: {},
+            htmlmin: {}
         });
 
         // Iterate over all specified file groups.      
@@ -39,7 +39,7 @@ module.exports = function (grunt) {
 
     var renderTemplate = function (moduleName, f, options) {
 
-        var template = "[moduleName].run(['$templateCache', function($templateCache) {\n\n[views]\n\n}]);";
+        var template = "[moduleName].run(['$templateCache', function($templateCache) {[views]\n\n}]);";
 
         // Concat specified files.
         var views = f.src.filter(function (filepath) {
@@ -68,7 +68,7 @@ module.exports = function (grunt) {
 
     var renderView = function (viewName, view, options) {
 
-        var template = "\t$templateCache.put('[viewName]', \n\t '[view]);\t\n'";
+        var template = "\n\n$templateCache.put(\"[viewName]\", \n    \"[view]\");";
         return template.replace("[viewName]", viewName).replace("[view]", view);
 
     };

@@ -39,7 +39,7 @@ module.exports = function (grunt) {
                 options: {
                 },
                 files: {
-                    'tmp/custom_options.js': ['test/**/*.html']
+                    'result/custom_options.js': ['test/**/*.html']
                 }
 
             }
