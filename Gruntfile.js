@@ -35,14 +35,15 @@ module.exports = function (grunt) {
         },
         // Configuration to be run (and then tested).
         ngModule: {
-            ui: {
-                options: {
-                },
-                files: {
-                    'result/custom_options.js': ['test/**/*.html']
-                }
-
-            }
+            options: {
+            },
+            files: [
+                {
+                    src: 'test/**/module.json',
+                    dest: 'result/test.js',
+                    cwd: 'test/ui',
+                    expand: true
+                }]
         },
         // Unit tests.
         nodeunit: {
