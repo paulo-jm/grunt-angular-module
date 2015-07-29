@@ -1,7 +1,31 @@
 {
     "module": {
-        
-        "name" : "ui"
-        
+        "name": "ui",
+        "modules": [
+            {
+                "name": "ui.card",
+                "service": "card/service/*.js",
+                "controller": "card/controller/*.js",
+                "directive": "card/directive/*.js",
+                "view": "card/view/*.html"
+            },
+            {
+                "name": "ui.content",
+                "service": "content/service/*.js",
+                "controller": "content/controller/*.js",
+                "directive": "content/directive/*.js",
+                "view": "content/view/*.html"
+
+            },
+            {
+                "name": "ui.tab",
+                "service": "tab/service/*.js",
+                "controller": "tab/controller/*.js",
+                "directive": "tab/directive/*.js",
+                "view": "tab/view/*.html"
+
+            }
+        ]
+
     }
 }

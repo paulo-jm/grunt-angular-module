@@ -11,24 +11,23 @@ exports.init = function (grunt) {
     'use strict';
 
     var path = require('path');
-    var template = "[moduleName].run(['$templateCache', function($templateCache) {[views]\n\n}]);";
+    var template = "app.run(['$templateCache', function($templateCache) {[views]\n\n}]);";
     var templateView = "\n\n$templateCache.put(\"[viewName]\", \n    \"[view]\");";
-    
+
     var exports = {};
 
-    exports.renderTemplate = function (dirPath, moduleName, options) {
-        
-        var viewPath = path.join(dirPath, "view/*.html");
-        var views;
-        
-        grunt.file.expand(viewPath).forEach(function(filepath) {
-            
-            var html = exports.getHtml(filepath, options);
-            views += exports.renderView(moduleName, html, options);
-          
+    exports.renderTemplate = function (dirPath,  options) {
+
+        var views = "";
+        grunt.file.expand(dirPath).forEach(function (filepath) {
+
+            var view = exports.getHtml(filepath, options);
+            var viewName = path.basename(filepath);
+            views += exports.renderView(viewName, view);
+
         });
-            
-        return template.replace("[moduleName]", moduleName).replace("[views]", views);
+
+        return template.replace("[views]", views);
 
     };
 
@@ -60,7 +59,7 @@ exports.init = function (grunt) {
         var nlReplace = '\\n' + quoteChar + ' +\n' + indentString + indentString + quoteChar;
         return content.replace(bsRegexp, '\\\\').replace(quoteRegexp, '\\' + quoteChar).replace(/\r?\n/g, nlReplace);
     };
-    
+
     return exports;
-    
+
 };

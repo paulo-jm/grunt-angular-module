@@ -13,7 +13,7 @@
 module.exports = function (grunt) {
 
     var path = require('path');
-    var view = require('./lib/view').init(grunt);
+    var module = require('./lib/module').init(grunt);
 
     // Please see the Grunt documentation for more information regarding task
     // creation: http://gruntjs.com/creating-tasks
@@ -26,10 +26,19 @@ module.exports = function (grunt) {
             indentString: '  ',
             htmlmin: {}
         });
-        
-        
-        var viewHtml = view.renderTemplate("test/ui", "ui", options);
-        
+
+
+        var ojb = {
+            "name": "ui.card",
+            "service": "card/service/*.js",
+            "controller": "card/controller/*.js",
+            "directive": "card/directive/*.js",
+            "view": "card/view/*.html"
+        };
+
+        var moduleAngular = module.createModule("test/ui/", ojb, options);
+        grunt.file.write("result/ui.module.js", moduleAngular);
+         
     });
-    
+
 };
