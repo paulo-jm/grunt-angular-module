@@ -74,9 +74,3 @@
     ui.directive('tab', TabDirective);
 
 }());
-
-
-
-
-
-

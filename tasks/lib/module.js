@@ -12,25 +12,40 @@ exports.init = function (grunt) {
 
     var path = require('path');
     var view = require('./view').init(grunt);
+    var UglifyJS = require('uglify-js');
 
     var exports = {};
 
-    var template = "/* global angular */\n(function () {\n\n var app = angular.module(\"[moduleName]\", []);\n\n/*services*/\n[services]\n\n/*controllers*/\n[controllers]\n\n/*directives*/\n[directives]\n\n/*views*/\n[views]\n\n}());";
+    var template = "(function () {\n\n var app = angular.module(\"[moduleName]\", []);\n\n/*services*/\n[services]\n\n/*controllers*/\n[controllers]\n\n/*directives*/\n[directives]\n\n/*views*/\n[views]\n\n}());";
 
-    exports.createModule = function (dirPath, module, options) {
+    exports.createModule = function (modulePath, options) {
 
-        var service = recursiveConcat(getFullPath(dirPath, module.service), '');
-        var controller = recursiveConcat(getFullPath(dirPath, module.controller), '');
-        var directive = recursiveConcat(getFullPath(dirPath, module.directive), '');
+        var moduleJson = grunt.file.readJSON(modulePath);
+        var moduleDirPath = path.dirname(modulePath);
+        var moduleFile = "";
+        var key;
+        
+        for (key in moduleJson.modules) {
 
-        var views = view.renderTemplate(getFullPath(dirPath, module.view), options);
+            var module = moduleJson.modules[key];
+            var service = recursiveConcat(getFullPath(moduleDirPath, module.service), '');
+            var controller = recursiveConcat(getFullPath(moduleDirPath, module.controller), '');
+            var directive = recursiveConcat(getFullPath(moduleDirPath, module.directive), '');
 
-        return template
-                .replace("[moduleName]", module.name)
-                .replace("[services]", service)
-                .replace("[controllers]", controller)
-                .replace("[directives]", directive)
-                .replace("[views]", views);
+            var views = view.renderTemplate(getFullPath(moduleDirPath, module.view), options);
+
+            moduleFile += template
+                    .replace("[moduleName]", module.name)
+                    .replace("[services]", service)
+                    .replace("[controllers]", controller)
+                    .replace("[directives]", directive)
+                    .replace("[views]", views);
+        }
+        
+        var ast = UglifyJS.parse(moduleFile);
+        var stream = UglifyJS.OutputStream(options.uglify);
+        var code = ast.print(stream);
+        return stream.toString();
 
     };
 
@@ -48,11 +63,17 @@ exports.init = function (grunt) {
                 });
             } else {
                 grunt.log.writeln('Concatenating ' + file + ' to other ' + result.length + ' characters.');
-                result += grunt.file.read(file);
+
+                result += trim(grunt.file.read(file));
             }
         });
         return result;
     };
+
+    function trim(str) {
+        var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+        return str.replace(rtrim, '');
+    }
 
     return exports;
 

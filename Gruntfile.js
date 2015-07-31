@@ -36,14 +36,15 @@ module.exports = function (grunt) {
         // Configuration to be run (and then tested).
         ngModule: {
             options: {
+                uglify: {
+                    banner: '/* global angular */\n',
+                    beautify: true
+                }
             },
-            files: [
-                {
-                    src: 'test/**/module.json',
-                    dest: 'result/test.js',
-                    cwd: 'test/ui',
-                    expand: true
-                }]
+            files: {
+                src: 'test/**/module.json',
+                dest: 'result/test.js',
+            }
         },
         // Unit tests.
         nodeunit: {

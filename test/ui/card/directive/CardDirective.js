@@ -1,5 +1,4 @@
 /* global app */
-
 (function (app) {
     'use strict';
 
@@ -24,5 +23,3 @@
     app.directive('card', CardDirective);
 
 }(app));
-
-

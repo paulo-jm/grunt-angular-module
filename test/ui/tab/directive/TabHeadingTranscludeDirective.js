@@ -27,9 +27,3 @@
     ui.directive('tabHeadingTransclude', TabHeadingTranscludeDirective);
 
 }());
-
-
-
-
-
-

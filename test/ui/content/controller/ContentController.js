@@ -11,5 +11,3 @@
     ui.controller('ContentController', ContentController);
 
 }());
-
-

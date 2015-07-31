@@ -60,5 +60,3 @@
     ui.controller('TabsetController', TabsetController);
 
 }());
-
-

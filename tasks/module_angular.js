@@ -24,21 +24,32 @@ module.exports = function (grunt) {
             separator: ', ',
             quoteChar: '"',
             indentString: '  ',
-            htmlmin: {}
+            htmlmin: {},
+            uglify: {}
         });
 
+        this.files.forEach(function (file) {
 
-        var ojb = {
-            "name": "ui.card",
-            "service": "card/service/*.js",
-            "controller": "card/controller/*.js",
-            "directive": "card/directive/*.js",
-            "view": "card/view/*.html"
-        };
+            var contents = file.src.filter(function (filepath) {
+                // Remove nonexistent files (it's up to you to filter or warn here).
+                if (!grunt.file.exists(filepath)) {
+                    grunt.log.warn('Source file "' + filepath + '" not found.');
+                    return false;
+                } else {
+                    return true;
+                }
+            }).map(function (filepath) {
+                // Read and return the file's source.
+                return module.createModule(filepath, options);
 
-        var moduleAngular = module.createModule("test/ui/", ojb, options);
-        grunt.file.write("result/ui.module.js", moduleAngular);
-         
+            }).join('\n');
+            // Write joined contents to destination filepath.
+            grunt.file.write(file.dest, contents);
+            // Print a success message.
+            grunt.log.writeln('File "' + file.dest + '" created.');
+            
+        });
+
     });
 
 };

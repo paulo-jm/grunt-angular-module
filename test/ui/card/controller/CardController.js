@@ -1,5 +1,4 @@
 /* global app */
-
 (function (app) {
     'use strict';
 
