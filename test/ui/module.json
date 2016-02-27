@@ -1,19 +1,23 @@
 {
     "name": "ui",
+    "requiredModule" : "'ui.card','ui.content','ui.tab'",
+    "config": "config/ui-config.js",
     "modules": [
         {
             "name": "ui.card",
             "service": "card/service/*.js",
             "controller": "card/controller/*.js",
             "directive": "card/directive/*.js",
-            "view": "card/view/*.html"
+            "view": "card/view/*.html",
+            "requiredModule" : "'teste','teste2'"
         },
         {
             "name": "ui.content",
             "service": "content/service/*.js",
             "controller": "content/controller/*.js",
             "directive": "content/directive/*.js",
-            "view": "content/view/*.html"
+            "view": "content/view/*.html",
+            "requiredModule" : ""
 
         },
         {
@@ -21,7 +25,8 @@
             "service": "tab/service/*.js",
             "controller": "tab/controller/*.js",
             "directive": "tab/directive/*.js",
-            "view": "tab/view/*.html"
+            "view": "tab/view/*.html",
+            "requiredModule" : ""
 
         }
     ]

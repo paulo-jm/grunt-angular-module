@@ -19,37 +19,20 @@ module.exports = function (grunt) {
                 open: true // do not open node-inspector in Chrome automatically 
             }
         },
-        jshint: {
-            all: [
-                'Gruntfile.js',
-                'tasks/*.js',
-                '<%= nodeunit.tests %>'
-            ],
-            options: {
-                jshintrc: '.jshintrc'
-            }
-        },
-        // Before generating any new files, remove any previously-created files.
-        clean: {
-            tests: ['tmp']
-        },
         // Configuration to be run (and then tested).
         ngModule: {
             options: {
                 uglify: {
-                    banner: '/* global angular */\n',
                     beautify: true
                 }
             },
-            files: {
-                src: 'test/**/module.json',
-                dest: 'result/test.js',
-            }
+            files: 
+                {
+                    src: 'test/**/module.json',
+                    dest: 'result/test.js',
+                }
+            
         },
-        // Unit tests.
-        nodeunit: {
-            tests: ['test/*_test.js']
-        }
 
     });
 
@@ -62,11 +45,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
     grunt.loadNpmTasks('grunt-debug-task');
 
-    // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-    // plugin's task(s), then test the result.
-    grunt.registerTask('test', ['clean', 'ngModule', 'nodeunit']);
-
     // By default, lint and run all tests.
-    grunt.registerTask('default', ['jshint', 'test']);
+    grunt.registerTask('default', ['ngModule', 'debug']);
 
 };

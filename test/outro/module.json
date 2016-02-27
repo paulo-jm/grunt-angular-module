@@ -1,0 +1,15 @@
+{
+    "name": "outro",
+    "requiredModule" : "'ui.card'",
+    "config": "config/outros-config.js",
+    "modules": [
+        {
+            "name": "ui.card",
+            "service": "card/service/*.js",
+            "controller": "card/controller/*.js",
+            "directive": "card/directive/*.js",
+            "view": "card/view/*.html",
+            "requiredModule" : "'teste','teste2'"
+        }
+    ]
+}
